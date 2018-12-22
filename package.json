@@ -21,5 +21,9 @@
     "url": "git"
   },
   "author": "Jussi",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^5.10.0",
+    "eslint-plugin-react": "^7.11.1"
+  }
 }
