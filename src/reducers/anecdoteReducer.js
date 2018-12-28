@@ -22,11 +22,9 @@ const initialState = anecdotesAtStart.map(asObject)
 const reducer = (store = initialState, action) => {
   if (action.type === 'VOTE') {
     const id = action.data.id
-    //const old = store.filter(a => a.id !== action.id)
     const voted = store.find(a => a.id === id)
     const votedAnecdote = { ...voted, votes: voted.votes + 1 }
-    //voted.votes + 1
-    console.log(voted)
+
     return store.map(anec => anec.id !== id ? anec : votedAnecdote )
   }
   if (action.type === 'CREATE') {
