@@ -1,6 +1,13 @@
 import React from 'react'
+import anecdoteReducer from '../reducers/anecdoteReducer'
+import PropTypes from 'prop-types'
+
 
 class AnecdoteList extends React.Component {
+  static propTypes = {
+    store: PropTypes.object.isRequired
+  }
+
   render() {
     const anecdotes = this.props.store.getState()
     return (
@@ -12,10 +19,10 @@ class AnecdoteList extends React.Component {
               {anecdote.content}
             </div>
             <div>
-              has {anecdote.votes}
-              <button onClick={() => 
-                this.props.store.dispatch({ type: 'VOTE', id: anecdote.id })
-              }>
+              has {anecdote.votes} votes <button onClick={() =>
+                this.props.store.dispatch(
+                  anecdoteReducer.actionFor.aVoting(anecdote.id)
+                )}>
                 vote
               </button>
             </div>
