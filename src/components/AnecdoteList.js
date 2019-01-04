@@ -2,7 +2,7 @@ import React from 'react'
 import anecdoteReducer from '../reducers/anecdoteReducer'
 import PropTypes from 'prop-types'
 import notificationReducer from '../reducers/notificationReducer'
-
+import Filter from './Filter'
 
 class AnecdoteList extends React.Component {
   static propTypes = {
@@ -15,16 +15,16 @@ class AnecdoteList extends React.Component {
     }
   }
 
-  handleVote = (id, text) => {
-    const anec = text.toString()
+  handleVote = (id, anecdotes) => {
+    //const anec = text.toString()
+    const anec = anecdotes.find( a => a.id === id)
     this.props.store.dispatch(
-      anecdoteReducer.actionFor.aVoting(id),
-      notificationReducer.actionFor.aVoting(anec)
-    )
-  }
-
-  handleFilterChange = (event) => {
-    this.setState({ filter: event.target.value })
+      anecdoteReducer.actionFor.aVoting(id, anec.content),
+      notificationReducer.actionFor.vote(id, anec.content))
+    setTimeout( () => {
+      this.props.store.dispatch(
+        notificationReducer.actionFor.nullNotif())
+    }, 5000)
   }
 
   render() {
@@ -32,16 +32,13 @@ class AnecdoteList extends React.Component {
     console.log(anecdotes)
     const filteredAnec = anecdotes.filter(anec => {
       return anec.content.toLowerCase()
-        .includes(this.state.filter.toLowerCase())
+        .includes(this.props.store.getState().filter.toLowerCase())
     })
 
     return (
       <div>
         <h2>Anecdotes</h2>
-        <div>
-          filter: <input value={this.state.filter}
-            onChange={this.handleFilterChange}/>
-        </div>
+        <Filter store={this.props.store} />
         <br></br>
         {filteredAnec.sort((a, b) => b.votes - a.votes).map(anecdote =>
           <div key={anecdote.id}>
@@ -50,7 +47,7 @@ class AnecdoteList extends React.Component {
             </div>
             <div>
               has {anecdote.votes} votes <button onClick={() => {
-                this.handleVote(anecdote.id, anecdote.content)
+                this.handleVote(anecdote.id, anecdotes)
               }}>
                 vote
               </button>

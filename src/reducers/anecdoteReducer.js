@@ -42,14 +42,13 @@ const actionFor = {
       content
     }
   },
-  aVoting(id) {
+  aVoting(id, content) {
     console.log(id)
     return {
       type: 'VOTE',
-      data: { id }
+      data: { id, content }
     }
   }
 }
-
 
 export default { reducer, actionFor }

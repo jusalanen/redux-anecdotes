@@ -12,9 +12,10 @@ class AnecdoteForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault()
     const content = e.target.anecdote.value
+    console.log(content)
     this.props.store.dispatch(
       anecdoteReducer.actionFor.aCreation(content),
-      notificationReducer.actionFor.notificate('You added anecdote: ' + content))
+      notificationReducer.actionFor.create(content))
     e.target.anecdote.value = ''
     setTimeout( () => {
       this.props.store.dispatch(
