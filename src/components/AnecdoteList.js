@@ -8,15 +8,8 @@ class AnecdoteList extends React.Component {
   static propTypes = {
     store: PropTypes.object.isRequired
   }
-  constructor(props) {
-    super(props)
-    this.state = {
-      filter: ''
-    }
-  }
 
   handleVote = (id, anecdotes) => {
-    //const anec = text.toString()
     const anec = anecdotes.find( a => a.id === id)
     this.props.store.dispatch(
       anecdoteReducer.actionFor.aVoting(id, anec.content),
@@ -29,7 +22,6 @@ class AnecdoteList extends React.Component {
 
   render() {
     const anecdotes = [].concat(this.props.store.getState().anecdotes)
-    console.log(anecdotes)
     const filteredAnec = anecdotes.filter(anec => {
       return anec.content.toLowerCase()
         .includes(this.props.store.getState().filter.toLowerCase())

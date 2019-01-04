@@ -43,7 +43,6 @@ const actionFor = {
     }
   },
   aVoting(id, content) {
-    console.log(id)
     return {
       type: 'VOTE',
       data: { id, content }

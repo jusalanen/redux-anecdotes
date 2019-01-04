@@ -12,7 +12,6 @@ class AnecdoteForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault()
     const content = e.target.anecdote.value
-    console.log(content)
     this.props.store.dispatch(
       anecdoteReducer.actionFor.aCreation(content),
       notificationReducer.actionFor.create(content))
@@ -35,9 +34,5 @@ class AnecdoteForm extends React.Component {
     )
   }
 }
-AnecdoteForm.contextTypes = {
-  store: PropTypes.object
-}
-
 
 export default AnecdoteForm
