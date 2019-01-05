@@ -18,7 +18,7 @@ const reducer = (state = initState, action) => {
   return state
 }
 
-const actionFor = {
+const action = {
   create(content) {
     return {
       type: 'CREATE',
@@ -37,4 +37,4 @@ const actionFor = {
     }
   }
 }
-export default { reducer, actionFor }
+export default { reducer, action }
