@@ -1,13 +1,12 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import actionFor from '../reducers/filterReducer'
+import { actionFor } from '../reducers/filterReducer'
 import { connect } from 'react-redux'
 
 
 class Filter extends React.Component {
-  static propTypes = {
+  /*static propTypes = {
     store: PropTypes.object.isRequired
-  }
+  }*/
 
   handleChange = (event) => {
     const filter = event.target.value

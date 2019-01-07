@@ -37,4 +37,5 @@ const action = {
     }
   }
 }
-export default { reducer, action }
+export default { reducer }
+export { action }

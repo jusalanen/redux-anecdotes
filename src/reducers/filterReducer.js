@@ -17,4 +17,5 @@ const actionFor = {
   }
 }
 
-export default { reducer, actionFor }
+export default { reducer }
+export { actionFor }

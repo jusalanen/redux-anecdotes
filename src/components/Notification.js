@@ -1,12 +1,11 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 
 class Notification extends React.Component {
-  static propTypes = {
+  /*static propTypes = {
     store: PropTypes.object.isRequired
-  }
+  }*/
 
   render() {
     const style = {

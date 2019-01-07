@@ -1,37 +1,36 @@
 import React from 'react'
-import anecdoteReducer from '../reducers/anecdoteReducer'
-import PropTypes from 'prop-types'
-import notificationReducer from '../reducers/notificationReducer'
+import { actionFor } from '../reducers/anecdoteReducer'
+import { action } from '../reducers/notificationReducer'
 import Filter from './Filter'
+import { connect } from 'react-redux'
+
 
 class AnecdoteList extends React.Component {
-  static propTypes = {
+  /*static propTypes = {
     store: PropTypes.object.isRequired
-  }
+  }*/
 
   handleVote = (id, anecdotes) => {
     const anec = anecdotes.find( a => a.id === id)
-    this.props.store.dispatch(
-      anecdoteReducer.actionFor.aVoting(id, anec.content),
-      notificationReducer.actionFor.vote(id, anec.content))
+    actionFor.aVoting(id, anec.content)
+    action.vote(id, anec.content)
     setTimeout( () => {
-      this.props.store.dispatch(
-        notificationReducer.actionFor.nullNotif())
+      action.nullNotif()
     }, 5000)
   }
 
   render() {
-    const anecdotes = [].concat(this.props.store.getState().anecdotes)
-    const filteredAnec = anecdotes.filter(anec => {
+    const { anecdotes,  filter } = this.props
+    console.log(anecdotes)
+    const filteredAnec = anecdotes.filter((anec) => {
       return anec.content.toLowerCase()
-        .includes(this.props.store.getState().filter.toLowerCase())
+        .includes(filter.toLowerCase())
     })
 
     return (
       <div>
         <h2>Anecdotes</h2>
-        <Filter store={this.props.store} />
-        <br></br>
+        <Filter />
         {filteredAnec.sort((a, b) => b.votes - a.votes).map(anecdote =>
           <div key={anecdote.id}>
             <div>
@@ -51,4 +50,23 @@ class AnecdoteList extends React.Component {
   }
 }
 
-export default AnecdoteList
+const mapStateToProps = (state) => {
+  return {
+    anecdotes: state.anecdotes,
+    //notification: state.notification,
+    filter: state.filter
+  }
+}
+
+const mapDispatchToProps = {
+  actionFor,
+  action
+}
+
+const ConnectedAnecdoteList = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AnecdoteList)
+
+
+export default ConnectedAnecdoteList

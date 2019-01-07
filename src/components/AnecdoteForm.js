@@ -1,23 +1,22 @@
 import React from 'react'
-import actionFor from '../reducers/anecdoteReducer'
-import PropTypes from 'prop-types'
-import action from '../reducers/notificationReducer'
+import { actionFor } from '../reducers/anecdoteReducer'
+import { action } from '../reducers/notificationReducer'
 import { connect } from 'react-redux'
 
 
 class AnecdoteForm extends React.Component {
-  static propTypes = {
+  /*static propTypes = {
     store: PropTypes.object.isRequired
-  }
+  }*/
 
   handleSubmit = (e) => {
     e.preventDefault()
     const content = e.target.anecdote.value
-    actionFor.aCreation(content),
-    action.create(content)
+    this.props.actionFor.aCreation(content)
+    this.props.action.create(content)
     e.target.anecdote.value = ''
     setTimeout( () => {
-      actionFor.nullNotif()
+      action.nullNotif()
     }, 5000)
   }
 
@@ -34,20 +33,13 @@ class AnecdoteForm extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    anecdotes: state.anecdotes,
-    notification: state.notification
-  }
-}
-
 const mapDispatchToProps = {
   actionFor,
   action
 }
 
 const ConnectedAnecdoteForm = connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(AnecdoteForm)
 
