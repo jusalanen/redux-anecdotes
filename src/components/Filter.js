@@ -1,16 +1,13 @@
 import React from 'react'
-import { actionFor } from '../reducers/filterReducer'
+import { filterChange } from './../reducers/filterReducer'
 import { connect } from 'react-redux'
 
 
 class Filter extends React.Component {
-  /*static propTypes = {
-    store: PropTypes.object.isRequired
-  }*/
 
   handleChange = (event) => {
     const filter = event.target.value
-    this.props.actionFor.filterChange(filter)
+    this.props.filterChange(filter)
   }
 
   render() {
@@ -33,7 +30,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-  actionFor
+  filterChange
 }
 
 const ConnectedFilter = connect(

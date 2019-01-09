@@ -3,12 +3,12 @@ const initState = ''
 
 const reducer = (state = initState, action) => {
 
-  if (action.type === 'CREATE') {
+  if (action.type === 'CREANOT') {
     state = 'You added: "' + action.content + '"'
     return state
   }
-  if (action.type === 'VOTE') {
-    state = 'You voted: "'+ action.data.content + '"'
+  if (action.type === 'VOTENOT') {
+    state = 'You voted: "'+ action.content + '"'
     return state
   }
   if (action.type === 'NULL') {
@@ -18,24 +18,24 @@ const reducer = (state = initState, action) => {
   return state
 }
 
-const action = {
-  create(content) {
-    return {
-      type: 'CREATE',
-      content
-    }
-  },
-  vote(id, content) {
-    return {
-      type: 'VOTE',
-      data: { id, content }
-    }
-  },
-  nullNotif() {
-    return {
-      type: 'NULL'
-    }
+export const createNotif = (content) => {
+  return {
+    type: 'CREANOT',
+    content
   }
 }
-export default { reducer }
-export { action }
+
+export const voteNotif = (content) => {
+  return {
+    type: 'VOTENOT',
+    content
+  }
+}
+
+export const nullNotif = () => {
+  return {
+    type: 'NULL'
+  }
+}
+
+export default reducer

@@ -8,14 +8,11 @@ const reducer = (state = initState, action) => {
   return state
 }
 
-const actionFor = {
-  filterChange(filter) {
-    return {
-      type: 'FILTER',
-      filter
-    }
+export const filterChange = (filter) => {
+  return {
+    type: 'FILTER',
+    filter
   }
 }
 
-export default { reducer }
-export { actionFor }
+export default reducer

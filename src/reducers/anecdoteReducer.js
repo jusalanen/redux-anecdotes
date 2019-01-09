@@ -35,20 +35,20 @@ const reducer = (store = initialState, action) => {
   return store
 }
 
-const actionFor = {
-  aCreation(content) {
-    return {
-      type: 'CREATE',
-      content
-    }
-  },
-  aVoting(id, content) {
-    return {
-      type: 'VOTE',
-      data: { id, content }
-    }
+
+export const anecCreation = (content) => {
+  return {
+    type: 'CREATE',
+    content
   }
 }
 
-export default { reducer }
-export { actionFor }
+export const anecVoting = (id) => {
+  return {
+    type: 'VOTE',
+    data: { id }
+  }
+}
+
+
+export default reducer

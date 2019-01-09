@@ -1,21 +1,18 @@
 import React from 'react'
-import { actionFor } from '../reducers/anecdoteReducer'
-import { action } from '../reducers/notificationReducer'
+import { anecVoting } from './../reducers/anecdoteReducer'
+import { voteNotif } from './../reducers/notificationReducer'
+import { nullNotif } from './../reducers/notificationReducer'
 import Filter from './Filter'
 import { connect } from 'react-redux'
 
 
 class AnecdoteList extends React.Component {
-  /*static propTypes = {
-    store: PropTypes.object.isRequired
-  }*/
 
-  handleVote = (id, anecdotes) => {
-    const anec = anecdotes.find( a => a.id === id)
-    actionFor.aVoting(id, anec.content)
-    action.vote(id, anec.content)
+  handleVote = (anecdote) => {
+    this.props.anecVoting(anecdote.id)
+    this.props.voteNotif(anecdote.content)
     setTimeout( () => {
-      action.nullNotif()
+      this.props.nullNotif()
     }, 5000)
   }
 
@@ -38,7 +35,7 @@ class AnecdoteList extends React.Component {
             </div>
             <div>
               has {anecdote.votes} votes <button onClick={() => {
-                this.handleVote(anecdote.id, anecdotes)
+                this.handleVote(anecdote)
               }}>
                 vote
               </button>
@@ -59,8 +56,9 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-  actionFor,
-  action
+  anecVoting,
+  voteNotif,
+  nullNotif
 }
 
 const ConnectedAnecdoteList = connect(
