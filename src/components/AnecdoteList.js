@@ -1,7 +1,6 @@
 import React from 'react'
 import { anecVoting } from './../reducers/anecdoteReducer'
-import { voteNotif } from './../reducers/notificationReducer'
-import { nullNotif } from './../reducers/notificationReducer'
+import { voteNotif,  nullNotif } from './../reducers/notificationReducer'
 import Filter from './Filter'
 import { connect } from 'react-redux'
 

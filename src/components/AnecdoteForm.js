@@ -1,7 +1,6 @@
 import React from 'react'
 import { anecCreation } from './../reducers/anecdoteReducer'
-import { createNotif } from './../reducers/notificationReducer'
-import { nullNotif } from './../reducers/notificationReducer'
+import { createNotif, nullNotif } from './../reducers/notificationReducer'
 import { connect } from 'react-redux'
 
 
