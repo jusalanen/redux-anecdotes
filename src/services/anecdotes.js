@@ -12,4 +12,10 @@ const createNew = async (content) => {
   return resp.data
 }
 
-export default { getAll, createNew }
+const voteAnec = async (voted) => {
+  const strPut = url.concat('/', voted.id)
+  const resp = await axios.put(strPut, { ...voted, votes: voted.votes + 1 })
+  return resp.data
+}
+
+export default { getAll, createNew, voteAnec }

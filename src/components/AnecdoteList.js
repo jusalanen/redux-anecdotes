@@ -3,13 +3,15 @@ import { anecVoting } from './../reducers/anecdoteReducer'
 import { voteNotif,  nullNotif } from './../reducers/notificationReducer'
 import Filter from './Filter'
 import { connect } from 'react-redux'
+import anecdoteService from '../services/anecdotes'
 
 
 class AnecdoteList extends React.Component {
 
-  handleVote = (anecdote) => {
-    this.props.anecVoting(anecdote.id)
-    this.props.voteNotif(anecdote.content)
+  handleVote = async (anecdote) => {
+    const votedAnec = await anecdoteService.voteAnec(anecdote)
+    this.props.anecVoting(votedAnec)
+    this.props.voteNotif(votedAnec.content)
     setTimeout( () => {
       this.props.nullNotif()
     }, 5000)
@@ -49,7 +51,6 @@ class AnecdoteList extends React.Component {
 const mapStateToProps = (state) => {
   return {
     anecdotes: state.anecdotes,
-    //notification: state.notification,
     filter: state.filter
   }
 }
