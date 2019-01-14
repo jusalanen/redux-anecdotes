@@ -8,7 +8,7 @@ const reducer = (state = initState, action) => {
     return state
   }
   if (action.type === 'VOTENOT') {
-    state = 'You voted: "'+ action.content + '"'
+    state = 'You voted: "'+ action.content +'"'
     return state
   }
   if (action.type === 'NULL') {

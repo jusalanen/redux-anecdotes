@@ -7,7 +7,6 @@ import anecdoteService from '../services/anecdotes'
 
 class AnecdoteForm extends React.Component {
 
-
   handleSubmit = async (e) => {
     e.preventDefault()
     const content = e.target.anecdote.value
@@ -15,7 +14,8 @@ class AnecdoteForm extends React.Component {
     if (content.length === 0) {
       return
     }
-    const newAnec = await anecdoteService.createNew(content)
+    const newAnec = await anecdoteService
+      .createNew(content)
     this.props.anecCreation(newAnec)
     this.props.createNotif(content)
     setTimeout( () => {
